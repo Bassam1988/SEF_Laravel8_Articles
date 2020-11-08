@@ -4,6 +4,7 @@
 <div class="container-fluid">
     <main class="tm-main">
         <h1>Update Article</h1>
+@can('update', $post)
 <form method="POST" action="/Articles/{{ $post->id }}">
 @csrf
 @method('PUT')
@@ -46,6 +47,11 @@
     <input type="file" class="form-control-file" id="exampleFormControlFile1">
   </div>
 </form>
+
+@endcan
+@cannot('update',$post)
+  <h1>You are not authorized to update this articles</h1>
+@endcannot
 </main>
 </div>
 

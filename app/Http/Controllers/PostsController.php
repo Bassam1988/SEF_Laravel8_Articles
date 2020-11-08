@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\Posts;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -41,6 +42,7 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+         
         $this->validatePosts();
         $post=new Posts(request(['title','summary','body']));
         $post->user_id=auth()->id();
@@ -67,7 +69,7 @@ class PostsController extends Controller
      */
     public function show(Posts $posts)
     {
-        return view('postDetails',['posts'=>$posts]);
+        return view('articles.postDetails',['posts'=>$posts]);
     }
 
     /**
@@ -90,21 +92,22 @@ class PostsController extends Controller
      * @param  \App\Models\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Posts $posts)
+    public function update(Request $request, Posts $post)
     {
-
+       // die($post->user->is(auth()->user()));
+        $this->authorize('update',$post);
         $this->validatePosts();
-        $posts->title=request('title');
-        $posts->summary=request('summary');
-        $posts->body=request('body');
+        $post->title=request('title');
+        $post->summary=request('summary');
+        $post->body=request('body');
  
-        $posts->save();
+        $post->save();
         if(request('categories')){
-            $posts->categories()->detach();
-            $posts->categories()->attach(request('categories'));
+            $post->categories()->detach();
+            $post->categories()->attach(request('categories'));
         }
         
-        return redirect( route('postDetails',$posts));
+        return redirect( route('postDetails',$post));
         
         //$posts->categories()->attach(request('categories'));
 
@@ -139,6 +142,26 @@ class PostsController extends Controller
     public function destroy(Posts $posts)
     {
         //
+    }
+    public function others($user_id)
+    {
+        //die($user_id);
+        $user=User::find($user_id);
+      
+        $follows=$user->follows;
+        $posts=[];
+        foreach($follows as $follow)
+        {
+            $follow_post=$follow->posts;
+            foreach($follow_post as $post)
+            {
+               array_push($posts,$post);
+            }
+//            $posts=array_merge($posts,$follow_post);
+        }
+    
+        return view('articles.others',['posts'=>$posts]);
+        
     }
 
 }

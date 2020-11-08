@@ -5,8 +5,6 @@
     <div class="container-fluid">
         <main class="tm-main">
             <!-- Search form -->
-            
-         
             <div class="row tm-row">
                 <div class="col-12">
                     <form method="GET" class="form-inline tm-mb-80 tm-search-form">                
@@ -21,8 +19,7 @@
                 @forelse ($posts as $post)
                 <article class="col-12 col-md-6 tm-post">
                     <hr class="tm-hr-primary">
-                     <a href="/Articles/{{ $post->id }}/edit" class="effect-lily tm-post-link tm-pt-60">
-                    <span class="position-absolute tm-new-badge">Edit </span></a>
+                     
                     <a href="/postDetails/{{ $post->id }}" class="effect-lily tm-post-link tm-pt-60">
                         <div class="tm-post-link-inner">
                             <img src="{{ $post->img }}" alt="Image" class="img-fluid">                            

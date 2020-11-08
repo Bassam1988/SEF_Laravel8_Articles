@@ -1924,9 +1924,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+var default_layout = "default";
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {},
+  data: function data() {
+    return {
+      comments: []
+    };
+  },
+  props: ['comments'],
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.getComment();
+  },
+  methods: {
+    reverseMessage: function reverseMessage() {
+      this.message = this.comments[0].body;
+    },
+    getComment: function getComment() {
+      axios.get('').then()["catch"]();
+    }
   }
 });
 
@@ -37522,32 +37543,43 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
+  return _c(
+    "div",
+    { attrs: { id: "app-5" } },
+    [
+      _vm._l(_vm.comments, function(comment) {
+        return _c("div", { staticClass: "tm-comment tm-mb-45" }, [
+          _vm._v(
+            "\n                            " +
+              _vm._s(_vm.message) +
+              "\n                                "
+          ),
+          _c("div", [
+            _c("p", [
+              _vm._v(
+                "\n                                       " +
+                  _vm._s(comment.body) +
+                  "\n                                    "
+              )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
+            _c("div", { staticClass: "d-flex justify-content-between" }, [
+              _c("span", { staticClass: "tm-color-primary" }, [
+                _vm._v(_vm._s(comment.created_at))
+              ])
             ])
           ])
         ])
+      }),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.reverseMessage } }, [
+        _vm._v("Reverse Message")
       ])
-    ])
-  }
-]
+    ],
+    2
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -49886,8 +49918,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/bassam/Desktop/FSW/laravel8/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/bassam/Desktop/FSW/laravel8/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/laravel8/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/laravel8/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

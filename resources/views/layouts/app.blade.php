@@ -83,6 +83,7 @@
 
         <main class="py-4">
         @if (Auth::check())
+        
         <header class="tm-header" id="tm-header">
             <div class="tm-header-wrapper">
                 <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
@@ -102,9 +103,9 @@
                             <i class="fas fa-pen"></i>
                             Add New Article
                         </a></li>
-                        <li class="tm-nav-item"><a href="about.html" class="tm-nav-link">
+                        <li class="{{ Request::is('Articles/others/'.Auth::user()->id)? ' active' : '' }} tm-nav-item"><a href="/Articles/others/{{ Auth::user()->id }}" class="tm-nav-link">
                             <i class="fas fa-users"></i>
-                            About Xtra
+                            Other's Articles
                         </a></li>
                         <li class="tm-nav-item"><a href="contact.html" class="tm-nav-link">
                             <i class="far fa-comments"></i>
@@ -138,5 +139,6 @@
     </div>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/templatemo-script.js"></script>
+    
 </body>
 </html>

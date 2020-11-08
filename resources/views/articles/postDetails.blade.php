@@ -45,7 +45,7 @@
                         <div>
                             <h2 class="tm-color-primary tm-post-title">Comments</h2>
                             <hr class="tm-hr-primary tm-mb-45">
-
+                            <example-component v-bind:comments="{{ $posts->comments }}" ></example-component>
                             @forelse ($posts->comments as $comment)
          
                             <div class="tm-comment tm-mb-45">

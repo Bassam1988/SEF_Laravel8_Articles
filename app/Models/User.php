@@ -56,12 +56,12 @@ class User extends Authenticatable
 
     public function follows()
     {
-        return $this->belongsToMany(User::class, 'follow_id');
+        return $this->belongsToMany(User::class,'follows', 'follower_id','follow_id');
     }
 
     public function followers()
     {
-        return $this->belongsToMany(User::class, 'follower_id');
+        return $this->belongsToMany(User::class, 'follow_id');
     }
 
 }

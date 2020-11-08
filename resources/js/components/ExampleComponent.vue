@@ -1,23 +1,49 @@
-<template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
+<template id="container">
+<div id="app-5">
+                
 
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                            <div class="tm-comment tm-mb-45" v-for="comment in comments">
+                            {{ message }}
+                                <div>
+                                    <p>
+                                       {{ comment.body }}
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="tm-color-primary">{{ comment.created_at}}</span>
+                                    </div>                                                 
+                                </div>                                
+                            </div>
+                
+  <button v-on:click="reverseMessage">Reverse Message</button>
+</div>
+    
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
+const default_layout = "default";
+
+
+export default {
+  computed: {},
+  data() {
+      return {
+          comments:[]
+      }
+  },
+  props:['comments']
+  , mounted () {this.getComment()}
+  , methods: {
+    reverseMessage: function () {
+      this.message = this.comments[0].body
+    },
+    getComment: function()
+    {
+        axios.get('')
+        .then()
+        .catch();
+
     }
+  }
+};
+
 </script>
