@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/comments/{post_id}', [App\Http\Controllers\Api\commentController::class, 'postComments']);
+Route::get('comments', [App\Http\Controllers\Api\commentController::class, 'postComments']);
+Route::post('addComments', [App\Http\Controllers\Api\commentController::class, 'addNewComment']);

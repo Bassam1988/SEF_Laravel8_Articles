@@ -45,42 +45,7 @@
                         <div>
                             <h2 class="tm-color-primary tm-post-title">Comments</h2>
                             <hr class="tm-hr-primary tm-mb-45">
-                            <example-component v-bind:comments="{{ $posts->comments }}" ></example-component>
-                            @forelse ($posts->comments as $comment)
-         
-                            <div class="tm-comment tm-mb-45">
-                                <figure class="tm-comment-figure">
-                                    <img src="{{ $comment->user->info->image }}" alt="Image" class="mb-2 rounded-circle img-thumbnail"  style="height:100px">
-                                    <figcaption class="tm-color-primary text-center">{{ $comment->user->name }}</figcaption>
-                                </figure>
-                                <div>
-                                    <p>
-                                       {{ $comment->body }}
-                                    </p>
-                                    <div class="d-flex justify-content-between">
-                                        <span class="tm-color-primary">{{ $comment->created_at}}</span>
-                                    </div>                                                 
-                                </div>                                
-                            </div>
-                @empty
-                    <p>No comments</p>
-                @endforelse
-
-                            
-                            <form method="POST" action="/Articles/addComment/{{ $posts->id }}" class="mb-5 tm-comment-form">
-                            @csrf
-                                <h2 class="tm-color-primary tm-post-title mb-4">Your comment</h2>
-                         
-                                <div class="mb-4">
-                                    <textarea class="form-control @error('body') is-invalid @enderror" id="message" name="message" rows="6"></textarea>
-                                    @error('message')
-                                        <p class="invalid-feedback">{{ $errors->first('message') }}</p>
-                                    @enderror
-                                </div>
-                                <div class="text-right">
-                                    <button class="tm-btn tm-btn-primary tm-btn-small">Submit</button>                        
-                                </div>                                
-                            </form>                          
+                            <example-component v-bind:post_id="{{ $posts->id }}" v-bind:user_id="{{ auth()->id() }}" ></example-component>
                         </div>
                     </div>
                 </div>

@@ -18,6 +18,13 @@ class Posts extends Model
     public function comments()
     {
         return $this->hasMany(Comments::class)->latest();
+       
+    }
+
+    public function commentsinfo()
+    {
+        return $this->hasMany(Comments::class)->latest()->with(['user','user.info'])->get();
+        // return $post->comments->with(['user','user.info'])->get();
     }
 
     public function categories()

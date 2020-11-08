@@ -1929,6 +1929,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var default_layout = "default";
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {},
@@ -1937,16 +1963,43 @@ var default_layout = "default";
       comments: []
     };
   },
-  props: ['comments'],
+  props: ["post_id", "user_id"],
   mounted: function mounted() {
     this.getComment();
   },
   methods: {
-    reverseMessage: function reverseMessage() {
-      this.message = this.comments[0].body;
+    addComments: function addComments() {
+      var _this = this;
+
+      var message = document.getElementById("message").value;
+      var comment = {
+        body: message,
+        post_id: this.post_id,
+        user_id: this.user_id
+      };
+      var headers = {
+        Authorization: "Bearer my-token",
+        "My-Custom-Header": "foobar"
+      };
+      axios.post("/api/addComments", comment, {
+        headers: headers
+      }).then(function () {
+        document.getElementById("message").value = "";
+
+        _this.getComment();
+      })["catch"](function (error) {
+        _this.errorMessage = error.message;
+        console.error("There was an error!", error);
+      });
     },
     getComment: function getComment() {
-      axios.get('').then()["catch"]();
+      var _this2 = this;
+
+      axios.get("/api/comments?post_id=" + this.post_id).then(function (response) {
+        _this2.comments = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   }
 });
@@ -37547,21 +37600,41 @@ var render = function() {
     "div",
     { attrs: { id: "app-5" } },
     [
+      _c("div", { staticClass: "mb-5 tm-comment-form" }, [
+        _c("h2", { staticClass: "tm-color-primary tm-post-title mb-4" }, [
+          _vm._v("Your comment")
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-right" }, [
+          _c(
+            "button",
+            {
+              staticClass: "tm-btn tm-btn-primary tm-btn-small",
+              on: { click: _vm.addComments }
+            },
+            [_vm._v("\n        Submit\n      ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
       _vm._l(_vm.comments, function(comment) {
         return _c("div", { staticClass: "tm-comment tm-mb-45" }, [
-          _vm._v(
-            "\n                            " +
-              _vm._s(_vm.message) +
-              "\n                                "
-          ),
+          _c("figure", { staticClass: "tm-comment-figure" }, [
+            _c("img", {
+              staticClass: "mb-2 rounded-circle img-thumbnail",
+              staticStyle: { height: "100px" },
+              attrs: { src: comment.user.info.image, alt: "Image" }
+            }),
+            _vm._v(" "),
+            _c("figcaption", { staticClass: "tm-color-primary text-center" }, [
+              _vm._v("\n        " + _vm._s(comment.user.name) + "\n      ")
+            ])
+          ]),
+          _vm._v(" "),
           _c("div", [
-            _c("p", [
-              _vm._v(
-                "\n                                       " +
-                  _vm._s(comment.body) +
-                  "\n                                    "
-              )
-            ]),
+            _c("p", [_vm._v("\n        " + _vm._s(comment.body) + "\n      ")]),
             _vm._v(" "),
             _c("div", { staticClass: "d-flex justify-content-between" }, [
               _c("span", { staticClass: "tm-color-primary" }, [
@@ -37570,16 +37643,24 @@ var render = function() {
             ])
           ])
         ])
-      }),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.reverseMessage } }, [
-        _vm._v("Reverse Message")
-      ])
+      })
     ],
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-4" }, [
+      _c("textarea", {
+        staticClass: "form-control",
+        attrs: { id: "message", name: "message", rows: "6" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
