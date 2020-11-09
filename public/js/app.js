@@ -37620,29 +37620,37 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm._l(_vm.comments, function(comment) {
-        return _c("div", { staticClass: "tm-comment tm-mb-45" }, [
-          _c("figure", { staticClass: "tm-comment-figure" }, [
-            _c("img", {
-              staticClass: "mb-2 rounded-circle img-thumbnail",
-              staticStyle: { height: "100px" },
-              attrs: { src: comment.user.info.image, alt: "Image" }
-            }),
+        return _c(
+          "div",
+          { key: comment.id, staticClass: "tm-comment tm-mb-45" },
+          [
+            _c("figure", { staticClass: "tm-comment-figure" }, [
+              _c("img", {
+                staticClass: "mb-2 rounded-circle img-thumbnail",
+                staticStyle: { height: "100px" },
+                attrs: { src: comment.user.info.image, alt: "Image" }
+              }),
+              _vm._v(" "),
+              _c(
+                "figcaption",
+                { staticClass: "tm-color-primary text-center" },
+                [_vm._v("\n        " + _vm._s(comment.user.name) + "\n      ")]
+              )
+            ]),
             _vm._v(" "),
-            _c("figcaption", { staticClass: "tm-color-primary text-center" }, [
-              _vm._v("\n        " + _vm._s(comment.user.name) + "\n      ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("p", [_vm._v("\n        " + _vm._s(comment.body) + "\n      ")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex justify-content-between" }, [
-              _c("span", { staticClass: "tm-color-primary" }, [
-                _vm._v(_vm._s(comment.created_at))
+            _c("div", [
+              _c("p", [
+                _vm._v("\n        " + _vm._s(comment.body) + "\n      ")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "d-flex justify-content-between" }, [
+                _c("span", { staticClass: "tm-color-primary" }, [
+                  _vm._v(_vm._s(comment.created_at))
+                ])
               ])
             ])
-          ])
-        ])
+          ]
+        )
       })
     ],
     2

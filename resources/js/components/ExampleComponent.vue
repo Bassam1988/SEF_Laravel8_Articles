@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="tm-comment tm-mb-45" v-for="comment in comments">
+    <div class="tm-comment tm-mb-45" v-for="comment in comments" :key="comment.id">
       <figure class="tm-comment-figure">
         <img
           :src="comment.user.info.image"
